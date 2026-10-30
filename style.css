@@ -7,7 +7,120 @@
 
 .artist-name { font-size:clamp(3.8rem, 11vw, 9rem); font-weight:900; line-height:1; letter-spacing:-.075em; color:#b6ff00; margin: .2em 0 .25em; }
 
-.page-flash { position:fixed; inset:0; z-index:99999; background:rgba(255,0,0,.62); backdrop-filter:invert(1) grayscale(1) contrast(1.8); -webkit-backdrop-filter:invert(1) grayscale(1) contrast(1.8); pointer-events:none; opacity:0; }
-.page-flash.is-flashing { animation:page-red-flash .3s ease-in-out forwards; }
-@keyframes page-red-flash { 0% { opacity:0; } 12% { opacity:1; } 42% { opacity:1; } 100% { opacity:0; } }
+/* Red-negative page transition: 0.6s total, 80% tint, eased fade-out. */
+.page-flash { position:fixed; inset:0; z-index:99999; background:rgba(255,0,0,.8); backdrop-filter:invert(1) grayscale(1) contrast(1.55); -webkit-backdrop-filter:invert(1) grayscale(1) contrast(1.55); pointer-events:none; opacity:0; }
+.page-flash.is-flashing { animation:page-red-flash .6s both; }
+@keyframes page-red-flash {
+  0% { opacity:0; animation-timing-function:cubic-bezier(.2,.75,.35,1); }
+  14% { opacity:1; animation-timing-function:cubic-bezier(.12,.7,.16,1); }
+  24% { opacity:1; animation-timing-function:cubic-bezier(.12,.7,.16,1); }
+  100% { opacity:0; }
+}
 @media(prefers-reduced-motion:reduce) { .page-flash.is-flashing { animation:none; } }
+
+/* Avant-garde minimal layout: spacious, typographic, gallery-first */
+header { border-bottom:1px solid rgba(255,255,255,.4); padding:25px 4%; align-items:baseline; }
+header .logo { font-family:'Archivo Black',Impact,sans-serif; font-size:clamp(25px,3vw,42px); letter-spacing:-.075em; color:#b6ff00; }
+nav { gap:clamp(12px,2.1vw,32px); }
+nav a { font-size:12px; letter-spacing:.07em; }
+nav a:hover,nav a:focus-visible { color:#fff; text-decoration:none; }
+main { max-width:none; padding:clamp(55px,8vw,120px) 4% 120px; }
+.hero { min-height:70vh; justify-content:center; position:relative; }
+.hero .eyebrow { font-size:11px; letter-spacing:.22em; }
+.hero .artist-name { font-family:'Archivo Black',Impact,sans-serif; font-size:clamp(100px,22vw,340px); letter-spacing:-.095em; line-height:.85; margin:.18em 0 .1em; }
+.hero h1 { font-size:clamp(24px,3.5vw,56px); letter-spacing:-.055em; margin:30px 0 14px; color:#ff00d9; line-height:1; }
+.hero h1 br { display:none; }
+.hero .intro { font-size:14px; line-height:1.8; max-width:450px; }
+.action { margin-top:32px; background:transparent; color:#b6ff00; padding:0 0 7px; border-bottom:1px solid #b6ff00; font-size:13px; letter-spacing:.06em; }
+.action:hover { color:#fff; border-color:#fff; }
+h2 { font-size:clamp(54px,9vw,140px); line-height:.9; letter-spacing:-.07em; margin:20px 0 36px; }
+main > p { font-size:14px; max-width:540px; }
+.gallery { gap:85px 22px; margin-top:80px; }
+.work img { min-height:0; background:transparent; }
+.work p { font-size:12px; letter-spacing:.12em; margin-top:15px; }
+.illustration-gallery { margin-top:75px; gap:75px; }
+.illustration-gallery figcaption { font-size:12px; letter-spacing:.13em; }
+.statement { font-size:clamp(18px,2vw,26px); max-width:750px; }
+@media(max-width:700px) {
+  header { padding:20px 5%; gap:20px; }
+  nav { gap:13px; }
+  nav a { font-size:10px; }
+  main { padding:55px 5% 90px; }
+  .hero { min-height:65vh; }
+  .hero .artist-name { font-size:clamp(90px,24vw,170px); }
+  .gallery { grid-template-columns:1fr; gap:52px; margin-top:50px; }
+}
+
+/* Revision: larger, tighter home typography; subtly centered composition */
+.hero { width:min(100%, 1180px); margin-inline:auto; padding-left:clamp(12px,3.5vw,65px); min-height:72vh; }
+.hero .artist-name { font-size:clamp(120px,25vw,380px); line-height:.77; letter-spacing:-.105em; margin:.13em 0 .07em; }
+.hero h1 { font-size:clamp(31px,4.6vw,72px); line-height:.91; letter-spacing:-.075em; margin:15px 0 12px; }
+.hero .intro { margin:5px 0; line-height:1.55; }
+.hero .action { margin-top:23px; }
+/* Restore the original artwork arrangement and spacing */
+.gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:50px 28px; margin-top:45px; }
+.work img { min-height:160px; background:#fff; }
+.work p { font-size:inherit; letter-spacing:normal; margin-top:1em; }
+.illustration-gallery { gap:48px; margin-top:42px; }
+.illustration-gallery figcaption { letter-spacing:1px; }
+@media(max-width:700px) {
+ .hero { padding-left:clamp(4px,2vw,16px); min-height:67vh; }
+ .hero .artist-name { font-size:clamp(105px,27vw,195px); }
+ .hero h1 { font-size:clamp(30px,7vw,50px); }
+ .gallery { grid-template-columns:1fr; gap:50px 28px; margin-top:45px; }
+}
+
+/* Compact exhibition view: see the whole series without scrolling on desktop */
+@media (min-width: 900px) {
+  main:has(.gallery), main:has(.illustration-gallery) { padding-top: 30px; padding-bottom: 35px; }
+  main:has(.gallery) h2, main:has(.illustration-gallery) h2 { font-size:clamp(38px,5.2vw,72px); margin:12px 0 10px; }
+  main:has(.gallery) > p, main:has(.illustration-gallery) > p { font-size:12px; line-height:1.45; margin:8px 0; }
+  .gallery { grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin-top:20px; }
+  .gallery .work img { height:min(48vh,460px); width:100%; min-height:0; object-fit:contain; background:transparent; }
+  .gallery .work p { font-size:12px; margin:8px 0 0; }
+  .illustration-gallery { grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:20px; }
+  .illustration-gallery img { width:100%; height:min(48vh,460px); max-height:none; object-fit:contain; }
+  .illustration-gallery figcaption { font-size:12px; margin-top:8px; }
+}
+@media (min-width: 700px) and (max-width:899px) {
+  .gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:25px; }
+  .gallery .work img { max-height:40vh; object-fit:contain; }
+  .illustration-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:25px; }
+  .illustration-gallery img { max-height:45vh; }
+}
+
+/* Center the second artwork series (PITUITARY), keep its compact image size. */
+@media (min-width:900px) {
+  main:has(img[src="pituitary1.jpg"]) .gallery {
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:18px;
+  }
+  main:has(img[src="pituitary1.jpg"]) .gallery .work {
+    flex:0 1 calc((100% - 42px)/4);
+    min-width:0;
+  }
+}
+/* Click any artwork to view full-size without cropping. */
+.gallery img, .illustration-gallery img { cursor:zoom-in; }
+.art-lightbox {
+  position:fixed; inset:0; z-index:100000; display:flex;
+  align-items:center; justify-content:center;
+  padding:clamp(16px,4vw,55px);
+  background:rgba(5,0,28,.94);
+  opacity:0; visibility:hidden;
+  transition:opacity .22s ease,visibility .22s;
+}
+.art-lightbox.open { opacity:1; visibility:visible; }
+.art-lightbox img { display:block; max-width:95vw; max-height:88vh; width:auto; height:auto; object-fit:contain; }
+.art-lightbox button {
+  position:absolute; top:16px; right:20px; color:#b6ff00;
+  background:none; border:0; font-size:34px; cursor:pointer; line-height:1;
+}
+.art-lightbox .lightbox-caption {
+  position:absolute; bottom:12px; left:20px; right:20px;
+  color:#fff; text-align:center; font-size:12px; letter-spacing:.08em;
+}
+body.lightbox-open { overflow:hidden; }
+@media(prefers-reduced-motion:reduce){.art-lightbox{transition:none}}

@@ -4,3 +4,10 @@
 @media(max-width:700px){nav{flex-wrap:wrap;row-gap:10px}}
 
 .illustration-gallery{display:grid;grid-template-columns:1fr;gap:48px;margin-top:42px}.illustration-gallery figure{margin:0}.illustration-gallery img{display:block;max-width:100%;width:auto;max-height:850px;height:auto;object-fit:contain}.illustration-gallery figcaption{color:#b6ff00;font-weight:700;margin-top:12px;letter-spacing:1px}
+
+.artist-name { font-size:clamp(3.8rem, 11vw, 9rem); font-weight:900; line-height:1; letter-spacing:-.075em; color:#b6ff00; margin: .2em 0 .25em; }
+
+.page-flash { position:fixed; inset:0; z-index:99999; background:rgba(255,0,0,.62); backdrop-filter:invert(1) grayscale(1) contrast(1.8); -webkit-backdrop-filter:invert(1) grayscale(1) contrast(1.8); pointer-events:none; opacity:0; }
+.page-flash.is-flashing { animation:page-red-flash .3s ease-in-out forwards; }
+@keyframes page-red-flash { 0% { opacity:0; } 12% { opacity:1; } 42% { opacity:1; } 100% { opacity:0; } }
+@media(prefers-reduced-motion:reduce) { .page-flash.is-flashing { animation:none; } }

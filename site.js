@@ -66,3 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
   viewer.addEventListener('click',e => {if(e.target===viewer)close();});
   document.addEventListener('keydown',e => {if(e.key==='Escape'&&viewer.classList.contains('open'))close();});
 });
+
+// Robust pointer hover fallback, including Safari and hybrid pointer devices.
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.gallery .work img, .illustration-gallery img').forEach(img => {
+    img.addEventListener('pointerenter', () => img.classList.add('is-negative'));
+    img.addEventListener('pointerleave', () => img.classList.remove('is-negative'));
+    img.addEventListener('mouseleave', () => img.classList.remove('is-negative'));
+    img.addEventListener('blur', () => img.classList.remove('is-negative'));
+  });
+});

@@ -193,3 +193,15 @@ body.lightbox-open { overflow:hidden; }
 @media (prefers-reduced-motion:reduce) {
   .gallery .work img, .illustration-gallery img { transition:none; }
 }
+
+/* FIX: always apply negative effect to artwork hover, independent of hover media queries. */
+.gallery .work img:hover, .illustration-gallery img:hover,
+.gallery .work:hover img, .illustration-gallery figure:hover img,
+.gallery .work img.is-negative, .illustration-gallery img.is-negative {
+  -webkit-filter: invert(100%) !important;
+  filter: invert(100%) !important;
+}
+.gallery .work img, .illustration-gallery img {
+  -webkit-transition: -webkit-filter .12s ease;
+  transition: filter .12s ease;
+}

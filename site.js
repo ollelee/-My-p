@@ -42,13 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     img.setAttribute('role','button');
     img.setAttribute('aria-label',(img.alt || 'Artwork') + ' - enlarge');
     function open(){
-      const flash = document.querySelector('.page-flash');
-      if (flash && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        flash.classList.remove('is-flashing', 'artwork-flash');
-        void flash.offsetWidth;
-        flash.classList.add('artwork-flash', 'is-flashing');
-        setTimeout(() => flash.classList.remove('artwork-flash', 'is-flashing'), 600);
-      }
       previousFocus = document.activeElement;
       full.src = img.currentSrc || img.src;
       full.alt = img.alt || '';

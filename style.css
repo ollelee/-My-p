@@ -182,3 +182,14 @@ body.lightbox-open { overflow:hidden; }
  main:has(img[src="work1.jpg"]) .gallery {grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 70px;width:90%;margin:24px auto 0;}
  main:has(img[src="work1.jpg"]) .gallery .work img {width:100%;height:28vh;max-height:260px;object-fit:contain;}
 }
+
+/* Artwork interactions: negative image on hover, red-negative flash on click. */
+.gallery .work img, .illustration-gallery img { transition:filter .16s ease; }
+@media (hover:hover) {
+  .gallery .work img:hover, .illustration-gallery img:hover { filter:invert(1); }
+}
+.gallery .work img:focus-visible, .illustration-gallery img:focus-visible { filter:invert(1); outline:2px solid #b6ff00; outline-offset:4px; }
+.page-flash.artwork-flash { z-index:100001; }
+@media (prefers-reduced-motion:reduce) {
+  .gallery .work img, .illustration-gallery img { transition:none; }
+}
